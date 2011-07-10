@@ -4,7 +4,7 @@
 * Функция форматирования времени в формат "n секунд/минут/часов/дней назад".
 *
 * @access	public
-* @param    int
+* @param	int
 * @return	string
 */
 function calculate_time_ago($timestamp)
