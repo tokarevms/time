@@ -5,11 +5,17 @@
 *
 * @access	public
 * @param	int
+* @param	string
 * @return	string
 */
-function calculate_time_ago($timestamp)
+function calculate_time_ago($timestamp, $format = 'unixtime')
 {
-	$diff = time() - $timestamp;
+	if($format == 'unixtime')
+		$diff = time() - $timestamp;
+	elseif($format == 'datetime')
+		$diff = time() - strtotime($timestamp);
+	else
+		return 'Некорректный параметр format';
 	
 	if($diff <= 10)
 		$time = 'только что';
