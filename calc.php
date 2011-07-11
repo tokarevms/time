@@ -4,18 +4,16 @@
 * Функция форматирования времени в формат "n секунд/минут/часов/дней назад".
 *
 * @access	public
-* @param	int
-* @param	string
+* @param	int, например '1102283188'
+* @param	string, например 'unixtime' или 'j-n-Y H:i:s', др.
 * @return	string
 */
-function calculate_time_ago($timestamp, $format = 'unixtime')
+function calculate_time_ago($timestamp = 0, $format = 'unixtime')
 {
 	if($format == 'unixtime')
 		$diff = time() - $timestamp;
-	elseif($format == 'datetime')
-		$diff = time() - strtotime($timestamp);
 	else
-		return 'Некорректный параметр format';
+		$diff = time() - date($format, $timestamp);
 	
 	if($diff <= 10)
 		$time = 'только что';
@@ -36,7 +34,7 @@ function calculate_time_ago($timestamp, $format = 'unixtime')
 	elseif($diff <= 365 * 24 * 3600)
 		$time = floor($diff / (24 * 3600)).' дней';
 	else
-		$time = date('j M Y', $timestamp);
+		$time = date('d M Y', $timestamp);
 	
 	return $time;
 }

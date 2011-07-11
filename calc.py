@@ -1,8 +1,20 @@
 # -*- coding: utf-8 -*-
 import time, math
 
-def calculate_time_ago(timestamp):
-	diff = time.time() - timestamp
+'''
+Функция форматирования времени в формат "n секунд/минут/часов/дней назад".
+
+@access	public
+@param	int, например '1102283188'
+@param	string, например 'unixtime' или '%d-%m-%Y %H:%M:%S', др.
+@return	string
+'''
+def calculate_time_ago(timestamp = 0, format = 'unixtime'):
+
+	if format == 'unixtime':
+		diff = time.time() - timestamp
+	else:
+		diff = time.time() - time.mktime(time.strptime(timestamp, format))
 	
 	if diff <= 10:
 		result = 'только что'
